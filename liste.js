@@ -10,16 +10,18 @@ async function initLoad () {
   const btns = document.querySelectorAll("button");
   // document.querySelector('.imageInfo').innerHTML = `${rootIndex+1} sur ${allImages.length}`;
   editImageInfo(rootIndex, allImages);
-  allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.add('onScreen');
+  // allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.add('onScreen');
+  setActiveImg(allImages,rootIndex);
   imageBlock.src = allImages[rootIndex];
   btns.forEach((btn, i) => {
     btn.addEventListener("click", () => {
       // no-more active
-      allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.remove('onScreen');
+      // allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.remove('onScreen');
       // new id
+      console.log(allImagesDiv.scrollLeft);
+      console.log(allImagesDiv.scrollWidth);
       id = btn.id;
       rootIndex = rootIndexer(rootIndex, 'get');
-      console.log(rootIndex);
       if (id === 'prev' && rootIndex > 0) {
         rootIndex--;
       } else if (id === 'next' && rootIndex < allImages.length-1 ) {
@@ -36,7 +38,8 @@ async function initLoad () {
       // global
       // document.querySelector('.imageInfo').innerHTML = `${rootIndex+1} sur ${allImages.length}`;
       editImageInfo(rootIndex, allImages)
-      allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.add('onScreen');
+      // allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.add('onScreen');
+      setActiveImg(allImages,rootIndex);
       imageBlock.src = allImages[rootIndex];
       //
     }, false);
@@ -58,7 +61,8 @@ function getAllImages(allImages, imageBlock) {
     image.id = `icone_${i}`;
     image.addEventListener("click", () => {
       imageBlock.src = allImages[i];
-      allImagesDiv.querySelector(`#icone_${i}`).classList.add('onScreen');
+      // allImagesDiv.querySelector(`#icone_${i}`).classList.add('onScreen');
+      setActiveImg(allImages,i);
       rootIndex = rootIndexer(i, 'set');
       editImageInfo(rootIndex, allImages);
     });
@@ -75,8 +79,15 @@ function rootIndexer(rootIndex, type) {
   return rootIndex;
 }
 //
+function setActiveImg(allImages,addIndex) {
+  allImages.forEach((item, i) => {
+    document.querySelector(`#icone_${i}`).classList.remove('onScreen');
+  });
+  document.querySelector(`#icone_${addIndex}`).classList.add('onScreen');
+}
+//
 function editImageInfo(rootIndex, allImages) {
-  document.querySelector('.imageInfo').innerHTML = `${rootIndex} sur ${allImages.length}`;
+  document.querySelector('.imageInfo').innerHTML = `${rootIndex+1} sur ${allImages.length}`;
   rootIndexer(rootIndex, 'set');
 }
 // let's go
