@@ -75,7 +75,8 @@ function setActiveImg(allImages,addIndex) {
     document.querySelector(`#icone_${i}`).classList.remove('onScreen');
   });
   document.querySelector(`#icone_${addIndex}`).classList.add('onScreen');
-  allImagesDiv.scrollLeft = document.querySelector(`#icone_${addIndex}`).offsetLeft -  (allImagesDiv.offsetWidth / 2);
+  allImagesDiv.scrollLeft = document.querySelector(`#icone_${addIndex}`).offsetLeft - allImagesDiv.offsetWidth;
+   // (allImagesDiv.offsetWidth / 2);
 }
 //
 function editImageInfo(rootIndex, allImages) {
