@@ -8,18 +8,11 @@ async function initLoad () {
   const imageBlock = document.querySelector('img');
   getAllImages(allImages, imageBlock);
   const btns = document.querySelectorAll("button");
-  // document.querySelector('.imageInfo').innerHTML = `${rootIndex+1} sur ${allImages.length}`;
   editImageInfo(rootIndex, allImages);
-  // allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.add('onScreen');
   setActiveImg(allImages,rootIndex);
   imageBlock.src = allImages[rootIndex];
   btns.forEach((btn, i) => {
     btn.addEventListener("click", () => {
-      // no-more active
-      // allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.remove('onScreen');
-      // new id
-      console.log(allImagesDiv.scrollLeft);
-      console.log(allImagesDiv.scrollWidth);
       id = btn.id;
       rootIndex = rootIndexer(rootIndex, 'get');
       if (id === 'prev' && rootIndex > 0) {
@@ -36,9 +29,7 @@ async function initLoad () {
       }
       rootIndexer(rootIndex, 'set');
       // global
-      // document.querySelector('.imageInfo').innerHTML = `${rootIndex+1} sur ${allImages.length}`;
-      editImageInfo(rootIndex, allImages)
-      // allImagesDiv.querySelector(`#icone_${rootIndex}`).classList.add('onScreen');
+      editImageInfo(rootIndex, allImages);
       setActiveImg(allImages,rootIndex);
       imageBlock.src = allImages[rootIndex];
       //
@@ -61,7 +52,6 @@ function getAllImages(allImages, imageBlock) {
     image.id = `icone_${i}`;
     image.addEventListener("click", () => {
       imageBlock.src = allImages[i];
-      // allImagesDiv.querySelector(`#icone_${i}`).classList.add('onScreen');
       setActiveImg(allImages,i);
       rootIndex = rootIndexer(i, 'set');
       editImageInfo(rootIndex, allImages);
@@ -80,15 +70,19 @@ function rootIndexer(rootIndex, type) {
 }
 //
 function setActiveImg(allImages,addIndex) {
+  allImagesDiv = document.querySelector('.allImages');
   allImages.forEach((item, i) => {
     document.querySelector(`#icone_${i}`).classList.remove('onScreen');
   });
   document.querySelector(`#icone_${addIndex}`).classList.add('onScreen');
+  allImagesDiv.scrollLeft = document.querySelector(`#icone_${addIndex}`).offsetLeft -  (allImagesDiv.offsetWidth / 2);
 }
 //
 function editImageInfo(rootIndex, allImages) {
-  document.querySelector('.imageInfo').innerHTML = `${rootIndex+1} sur ${allImages.length}`;
   rootIndexer(rootIndex, 'set');
+  // number not text
+  index = Number.parseInt(rootIndex, 10) + 1;
+  document.querySelector('.imageInfo').innerHTML = `${index} sur ${allImages.length}`;
 }
 // let's go
 if (window.addEventListener) {
