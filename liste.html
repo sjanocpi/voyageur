@@ -4,10 +4,13 @@
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Index de voyageur sjcpi</title>
 <meta name="viewport" content="width=device-width">
-
+<style media="screen">
+.image { position: relative; min-height: 400px;}
+.spinner {width: 48px; height: 48px; border: 5px solid #FFF; border-bottom-color: transparent; border-radius: 50%; display: inline-block; box-sizing: border-box;animation: rotation 1s linear infinite;position: absolute;left: 50%;top: 50%;z-index: 1;}
+    @keyframes rotation { 0% { transform: rotate(0deg);} 100% { transform: rotate(360deg);}}
+</style>
 <script type="text/javascript" src="liste.js"></script>
 <link rel="stylesheet" href="styles.css">
-
 </head>
 
 <body>
@@ -21,6 +24,7 @@
     <button id="next">&gt;</button>
   </div>
   <div class="image">
+    <span class="spinner"></span>
     <img>
   </div>
   <div class="allImages">

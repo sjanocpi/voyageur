@@ -43,11 +43,18 @@ div {
   margin: 0 auto;
   max-width: 640px;
 }
+.image {
+  align-items: center;
+  justify-content: center;
+  color: white;
+}
 .image img {
   width: 100%;
   width: 100%;
   border: solid 2px gray;
-  max-width: 640px
+  max-width: 640px;
+  min-height: 440px;
+  z-index: 2;
 }
 .allImages {
   max-width: 640px;
@@ -57,7 +64,7 @@ div {
   padding: 10px 2px;
 }
 .allImages img {
-  max-width: 50px;
+  max-height: 30px;
   margin: 0 5px;
   border: 1px solid silver;
 }
